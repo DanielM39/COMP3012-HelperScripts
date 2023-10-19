@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Find all `@todo` comments in the `.` and `src` directories"""
 from dataclasses import dataclass
-from enum import Enum
 from os import getenv, listdir, path, walk
 from sys import platform
 from typing import List
@@ -12,7 +11,7 @@ if platform == "win32":
     system("")
 
 
-class Style(Enum):
+class Style:
     RESET = "\u001b[0m"
     BOLD = "\u001b[1m"
     ITALICIZE = "\u001b[3m"
@@ -25,7 +24,7 @@ class ToDo:
     message: str
 
     def __repr__(self) -> str:
-        return f"{Style.BOLD.value}{self.message}{Style.RESET.value}\nIn: {Style.UNDERLINE.value}{self.filepath}{Style.RESET.value}"
+        return f"{Style.BOLD}{self.message}{Style.RESET}\nIn: {Style.UNDERLINE}{self.filepath}{Style.RESET}"
 
 
 def get_filepaths() -> List[str]:
@@ -89,5 +88,5 @@ if __name__ == "__main__":
             print(f"{todo}\n")
     else:
         print(
-            f"{Style.BOLD.value}No {Style.RESET.value}{Style.ITALICIZE.value if (str(getenv('TERM_PROGRAM')) != 'vscode' or getenv('TERM') is not None) else Style.BOLD.value}`@todo`{Style.RESET.value}{Style.BOLD.value}(s) found.{Style.RESET.value}"
+            f"{Style.BOLD}No {Style.RESET}{Style.ITALICIZE if (str(getenv('TERM_PROGRAM')) != 'vscode' or getenv('TERM') is not None) else Style.BOLD}`@todo`{Style.RESET}{Style.BOLD}(s) found.{Style.RESET}"
         )
