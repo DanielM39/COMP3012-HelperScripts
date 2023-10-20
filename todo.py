@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Find all `@todo` comments in the `.` and `src` directories"""
+"""Find all `@todo` and `TODO` comments in the `.` and `src` directories"""
 from dataclasses import dataclass
 from os import getenv, listdir, path, walk
 from sys import platform
@@ -16,6 +16,9 @@ class Style:
     BOLD = "\u001b[1m"
     ITALICIZE = "\u001b[3m"
     UNDERLINE = "\u001b[4m"
+
+
+LABELS = ["@todo", "TODO"]
 
 
 @dataclass
@@ -46,7 +49,7 @@ def get_todos() -> List[ToDo]:
             lines = file.readlines()
             todo_start = 0
             for i in range(0, len(lines)):
-                if "@todo" in lines[i]:
+                if True in [todo in lines[i] for todo in LABELS]:
                     todo_start = i + 1
                     message = ""
                     while "//" in lines[i]:
@@ -59,6 +62,8 @@ def get_todos() -> List[ToDo]:
                         .strip()
                         .removeprefix("@todo:")
                         .removeprefix("@todo")
+                        .removeprefix("TODO:")
+                        .removeprefix("TODO")
                         .strip()
                     )
                     if message != "":

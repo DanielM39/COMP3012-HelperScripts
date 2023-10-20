@@ -2,7 +2,7 @@
 
 ## [todo.py](./todo.py)
 ### Description
-Searches for all `@todo` comments in the `.` and `src` directories and displays them along with vscode clickable links to file and line number.
+Searches for all `@todo` and `TODO` comments in the `.` and `src` directories and displays them along with vscode clickable links to file and line number.
 
 *__Note:__* Place into root of Lab/Assignment to run.
 
