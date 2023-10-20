@@ -10,6 +10,7 @@ Searches for all `@todo` and `TODO` comments in the `.` and `src` directories an
 ```bash
 py todo.py
 ```
+![](./imgs/todo.png)
 
 ## [mongodb-service.py](./mongodb-service.py)
 ### Description
