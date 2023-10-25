@@ -19,6 +19,7 @@ class Style:
 
 
 LABELS = ["@todo", "TODO"]
+FILE_TYPES = ["js", "ejs", "ts"]
 
 
 @dataclass
@@ -34,7 +35,7 @@ def get_filepaths() -> List[str]:
     filepaths = [
         path.join(".", f)
         for f in listdir(".")
-        if path.isfile(f) and f.split(".")[-1] in ["js", "ejs", "ts"]
+        if path.isfile(f) and f.split(".")[-1] in FILE_TYPES
     ]
     for root, dirnames, filenames in walk("src"):
         for filename in filenames:
@@ -55,17 +56,10 @@ def get_todos() -> List[ToDo]:
                     while "//" in lines[i]:
                         message = f"{message}\n{lines[i].strip()}"
                         i += 1
-                    message = (
-                        message.strip()
-                        .strip("\n")
-                        .replace("//", "")
-                        .strip()
-                        .removeprefix("@todo:")
-                        .removeprefix("@todo")
-                        .removeprefix("TODO:")
-                        .removeprefix("TODO")
-                        .strip()
-                    )
+                    message = message.strip().strip("\n").replace("//", "").strip()
+                    for label in LABELS:
+                        message = message.strip(label)
+                    message = message.removeprefix(":").strip()
                     if message != "":
                         _message = list(message)
                         _message[0] = _message[0].upper()
