@@ -43,7 +43,9 @@ Action:
 ###  Description
 On Windows `npm` uses `cmd` as its default shell, this can cause issues (particularly with environment variables) due to how things are often handled directly between `cmd` and `sh`/`bash`/`zsh` (the usual for non Windows systems). This script will attempt to locate `sh.exe` (with `pwsh.exe` and `powershell.exe` as backups) and use it to set `node`'s `script-shell` option.
 
-## Usage
+*__Warning:__* Setting a different `script-shell` can cause it's own problems so only use if you are sure you need it.
+
+### Usage
 ```bash
 py set-npm-shell.py
 ```
