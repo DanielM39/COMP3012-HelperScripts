@@ -57,6 +57,6 @@ if __name__ == "__main__":
         )
         print(f"Shell:\t{shell_path}")
         shell_path = shell_path.replace('\\', "\\\\")
-        cmd: [str] = ["npm", "config", "set", f'script-shell="{shell_path}"']
+        cmd: [str] = ["npm", "config", "set", f'script-shell="{shell_path}"', "--userconfig", ".npmrc"]
         print(cmd)
         subprocess.run(cmd, shell=True)
